@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/controllers/auth_controller.dart';
 import 'package:shop_app/views/screens/auth/login_screen.dart';
 
 // ignore: must_be_immutable
 class RegisterScreen extends StatelessWidget {
+  final AuthController _authController =
+      AuthController(); //สร้างอ็อบเจ็กต์ของคลาส AuthController ที่เป็นตัวแปร _authController และกำหนดให้เป็นค่าสุดท้าย (final) ได้รับค่าแล้ว จะไม่สามารถเปลี่ยนแปลงค่าได้ในภายหลัง
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   late String email;
@@ -144,10 +147,9 @@ class RegisterScreen extends StatelessWidget {
                   //ปุ่มตรวจสอบว่าใส่ข้อมูลลงไปไหม
                   onTap: () {
                     if (_formkey.currentState!.validate()) {
-                      print(email);
-                      print(fullname);
-                      print(phone);
-                      print(password);
+                      _authController.createNewUser(
+                          email, fullname, phone, password);
+                      print('success');
                     } else {
                       print('Not Valid');
                     }

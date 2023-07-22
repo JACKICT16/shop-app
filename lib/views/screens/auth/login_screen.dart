@@ -4,6 +4,10 @@ import 'package:shop_app/views/screens/auth/register_screen.dart';
 class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  late String email;
+
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +39,9 @@ class LoginScreen extends StatelessWidget {
                   height: 25,
                 ),
                 TextFormField(
+                  onChanged: (value) {
+                    email = value;
+                  },
                   validator: (value) {
                     if (value!.isEmpty) {
                       return ('Please Email Address Must Not Be Empty');
@@ -56,6 +63,9 @@ class LoginScreen extends StatelessWidget {
                   height: 25,
                 ),
                 TextFormField(
+                  onChanged: (value) {
+                    password = value;
+                  },
                   validator: (value) {
                     if (value!.isEmpty) {
                       return ('Please Password Must Not Be Empty');
@@ -80,6 +90,9 @@ class LoginScreen extends StatelessWidget {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       print('Login in ');
+
+                      print(email);
+                      print(password);
                     } else {
                       print('unable to unauthentticate user');
                     }
