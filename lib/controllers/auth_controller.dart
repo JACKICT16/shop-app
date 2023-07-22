@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthController {
   // class จัดเก็บยืนยันตัวตนด้วย Firebase Authentication
+  final FirebaseFirestore _firestore =
+      FirebaseFirestore.instance; //ฐานข้อมูลในfirebase
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Future<String> createNewUser(
       //ฟังก์ชันสร้างบัญชีผู้ใช้ใหมา่
@@ -13,8 +16,14 @@ class AuthController {
 
     try {
       //ดักจับข้อผิดพลาด
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      await _firestore.collection('buyers').doc(userCredential.user!.uid).set({
+        'fullname': fullname,
+        'email': email,
+        'buyer_id': userCredential.user!.uid
+      });
 
       res = 'success';
     } catch (e) {
