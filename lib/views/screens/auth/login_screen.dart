@@ -7,77 +7,102 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(20, 60, 109, 1.0),
         body: Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center, //center of the screen
-        children: [
-          Text(
-            'Login Account',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 4, //ระยะห่างของตัวอักษร
-            ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Email Address'),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Password'),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          InkWell(
-            onTap: () {
-              print('logged in');
-            },
-            child: Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width - 40,
-              decoration: BoxDecoration(
-                color: Colors.pink,
-                borderRadius: BorderRadius.circular(
-                  10,
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, //center of the screen
+            children: [
+              Text(
+                'PSU SMART CANTEEN',
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 4,
+                    color:
+                        Color.fromARGB(255, 255, 200, 8) //ระยะห่างของตัวอักษร
+                    ),
+              ),
+              Text(
+                'Please Login',
+                style: TextStyle(
+                    fontSize: 15, letterSpacing: 2, color: Colors.white),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Email Address',
+                  hintText: 'Enter Email Address',
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Colors.yellowAccent,
+                  ),
+                  labelStyle: TextStyle(color: Colors.white),
                 ),
               ),
-              child: Center(
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    letterSpacing: 4,
-                    fontWeight: FontWeight.bold,
+              SizedBox(
+                height: 25,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  hintText: 'Enter Password',
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Colors.yellowAccent,
+                  ),
+                  labelStyle: TextStyle(color: Colors.white),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              InkWell(
+                onTap: () {
+                  print('logged in');
+                },
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width - 40,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 255, 200, 8),
+                    borderRadius: BorderRadius.circular(
+                      10,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        letterSpacing: 4,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return RegisterScreen();
-                  },
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return RegisterScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Text(
+                  'Need An Account?',
+                  style: TextStyle(color: Colors.white),
                 ),
-              );
-            },
-            child: Text(
-              'Need An Account?',
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }
