@@ -5,8 +5,13 @@ import 'package:shop_app/views/screens/auth/login_screen.dart';
 class RegisterScreen extends StatelessWidget {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  int num2 = 0;
+  late String email;
 
+  late String fullname;
+
+  late String phone;
+
+  late String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +45,9 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  onChanged: (value) {
+                    email = value;
+                  },
                   validator: (Value) {
                     if (Value!.isEmpty) {
                       return 'Please Email Address Must Not Be Empty';
@@ -61,6 +69,9 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  onChanged: (value) {
+                    fullname = value;
+                  },
                   validator: (Value) {
                     if (Value!.isEmpty) {
                       return 'Please Email Address Must Not Be Empty';
@@ -82,9 +93,12 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  onChanged: (value) {
+                    phone = value;
+                  },
                   validator: (Value) {
                     if (Value!.isEmpty) {
-                      return 'Please Email Address Must Not Be Empty';
+                      return 'Please Phone Number Must Not Be Empty';
                     } else {
                       return null;
                     }
@@ -103,6 +117,9 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  onChanged: (value) {
+                    password = value;
+                  },
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please Password Must Not Be Empty';
@@ -127,7 +144,10 @@ class RegisterScreen extends StatelessWidget {
                   //ปุ่มตรวจสอบว่าใส่ข้อมูลลงไปไหม
                   onTap: () {
                     if (_formkey.currentState!.validate()) {
-                      print('valid');
+                      print(email);
+                      print(fullname);
+                      print(phone);
+                      print(password);
                     } else {
                       print('Not Valid');
                     }
