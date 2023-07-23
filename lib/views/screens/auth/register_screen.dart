@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -5,9 +8,14 @@ import 'package:shop_app/controllers/auth_controller.dart';
 import 'package:shop_app/views/screens/auth/login_screen.dart';
 
 // ignore: must_be_immutable
-class RegisterScreen extends StatelessWidget {
-  final AuthController _authController =
-      AuthController(); //สร้างอ็อบเจ็กต์ของคลาส AuthController ที่เป็นตัวแปร _authController และกำหนดให้เป็นค่าสุดท้าย (final) ได้รับค่าแล้ว จะไม่สามารถเปลี่ยนแปลงค่าได้ในภายหลัง
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final AuthController _authController = AuthController();
+  //สร้างอ็อบเจ็กต์ของคลาส AuthController ที่เป็นตัวแปร _authController และกำหนดให้เป็นค่าสุดท้าย (final) ได้รับค่าแล้ว จะไม่สามารถเปลี่ยนแปลงค่าได้ในภายหลัง
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   late String email;
@@ -18,12 +26,23 @@ class RegisterScreen extends StatelessWidget {
 
   late String password;
 
+// การใส่ ? ของตัวแปร กล่าวคือ ตัวแปรนั้นจะมีค่าเป็น null ได้
+  Uint8List? _image;
+
   selectGalleryImage() async {
-    await _authController.pickProfileImage(ImageSource.gallery);
+    Uint8List im = await _authController.pickProfileImage(ImageSource.gallery);
+
+    setState(() {
+      _image = im;
+    });
   }
 
   captureImage() async {
-    await _authController.pickProfileImage(ImageSource.camera);
+    Uint8List im = await _authController.pickProfileImage(ImageSource.camera);
+
+    setState(() {
+      _image = im;
+    });
   }
 
   @override
@@ -61,15 +80,21 @@ class RegisterScreen extends StatelessWidget {
                 Stack(
                   //Stack ใช้สำหรับการจัดวางองค์ประกอบใน Flutter โดยสามารถวางองค์ประกอบลงมาบนองค์ประกอบอื่น ๆ แบบใกล้ชิดกัน
                   children: [
-                    CircleAvatar(
-                      //สร้างโปรไฟล์อวตาร
-                      radius: 65,
-                      child: Icon(
-                        Icons.person,
-                        size: 70,
-                        color: Color.fromRGBO(20, 60, 109, 1.0),
-                      ),
-                    ),
+                    _image == null
+                        ? CircleAvatar(
+                            //สร้างโปรไฟล์อวตาร
+                            radius: 65,
+                            child: Icon(
+                              Icons.person,
+                              size: 70,
+                              color: Color.fromRGBO(20, 60, 109, 1.0),
+                            ),
+                          )
+                        : CircleAvatar(
+                            //สร้างโปรไฟล์อวตาร
+                            radius: 65,
+                            backgroundImage: MemoryImage(_image!),
+                          ),
                     Positioned(
                       right: 0,
                       top: 15,
