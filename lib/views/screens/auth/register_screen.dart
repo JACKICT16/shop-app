@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shop_app/controllers/auth_controller.dart';
 import 'package:shop_app/views/screens/auth/login_screen.dart';
 
@@ -15,6 +17,15 @@ class RegisterScreen extends StatelessWidget {
   late String phone;
 
   late String password;
+
+  selectGalleryImage() async {
+    await _authController.pickProfileImage(ImageSource.gallery);
+  }
+
+  captureImage() async {
+    await _authController.pickProfileImage(ImageSource.camera);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +54,35 @@ class RegisterScreen extends StatelessWidget {
                     letterSpacing: 2,
                     color: Colors.white,
                   ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Stack(
+                  //Stack ใช้สำหรับการจัดวางองค์ประกอบใน Flutter โดยสามารถวางองค์ประกอบลงมาบนองค์ประกอบอื่น ๆ แบบใกล้ชิดกัน
+                  children: [
+                    CircleAvatar(
+                      //สร้างโปรไฟล์อวตาร
+                      radius: 65,
+                      child: Icon(
+                        Icons.person,
+                        size: 70,
+                        color: Color.fromRGBO(20, 60, 109, 1.0),
+                      ),
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: 15,
+                      child: IconButton(
+                        onPressed: () {
+                          selectGalleryImage();
+                        },
+                        icon: Icon(
+                          CupertinoIcons.photo,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 20,
