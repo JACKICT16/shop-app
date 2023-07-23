@@ -1,4 +1,5 @@
 {
     "cmake.configureOnOpen": true,
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "cmake.sourceDirectory": "D:/ICT/shop_app/linux"
 }

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shop_app/controllers/auth_controller.dart';
 import 'package:shop_app/views/screens/auth/login_screen.dart';
@@ -52,16 +53,72 @@ class _RegisterScreenState extends State<RegisterScreen> {
             email, fullname, phone, password, _image);
 
         if (res == 'success') {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            //นำผู้ใช้ที่สร้างใหม่ไปยังหน้าจอ LoginScreen ด้วยการใช้ Navigator เพื่อเปิดหน้าจอใหม่โดยที่ผู้ใช้จะได้เข้าสู่ระบบหลังจากที่สร้างบัญชีผู้ใช้สำเร็จแล้ว
-            return LoginScreen();
-          }));
+          // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   //นำผู้ใช้ที่สร้างใหม่ไปยังหน้าจอ LoginScreen ด้วยการใช้ Navigator เพื่อเปิดหน้าจอใหม่โดยที่ผู้ใช้จะได้เข้าสู่ระบบหลังจากที่สร้างบัญชีผู้ใช้สำเร็จแล้ว
+          //   return LoginScreen();
+          // }));
+
+          Get.to(LoginScreen()); //ถ้าregisterสำเร็จ ให้ไปยังหน้า login
+
+          Get.snackbar(
+            'Success',
+            'Account has been created successfully',
+            backgroundColor: Colors.yellowAccent,
+            colorText: Color.fromRGBO(20, 60, 109, 1.0),
+            margin: EdgeInsets.all(
+              15,
+            ),
+            icon: Icon(
+              Icons.message,
+              color: Color.fromRGBO(20, 60, 109, 1.0),
+            ),
+          );
+        } else {
+          Get.snackbar(
+            'Error Uccured',
+            res.toString(),
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            margin: EdgeInsets.all(
+              15,
+            ),
+            snackPosition: SnackPosition.BOTTOM,
+            icon: Icon(
+              Icons.message,
+              color: Colors.white,
+            ),
+          );
         }
       } else {
-        print('Not Valid');
+        Get.snackbar(
+          'Form',
+          'Form Fields is not valid',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: EdgeInsets.all(
+            15,
+          ),
+          icon: Icon(
+            Icons.message,
+            color: Colors.white,
+          ),
+        );
       }
     } else {
-      print('No Image Picked');
+      Get.snackbar(
+        'No Image',
+        'Please Capture or selected image',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        margin: EdgeInsets.all(
+          15,
+        ),
+        snackPosition: SnackPosition.BOTTOM,
+        icon: Icon(
+          Icons.message,
+          color: Colors.white,
+        ),
+      );
     }
   }
 
