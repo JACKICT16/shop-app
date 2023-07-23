@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shop_app/controllers/auth_controller.dart';
 import 'package:shop_app/views/screens/auth/register_screen.dart';
 
@@ -20,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
       String res = await _authController.loginUser(email, password);
 
       if (res == 'success') {
-        print('login in');
+        Get.snackbar('Login Success', 'You Are Now logged in');
       }
     }
   }
