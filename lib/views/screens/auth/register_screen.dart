@@ -45,6 +45,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
   }
 
+  registerUser() async {
+    if (_image != null) {
+      if (_formkey.currentState!.validate()) {
+        String res = await _authController.createNewUser(
+            email, fullname, phone, password, _image);
+
+        if (res == 'success') {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            //นำผู้ใช้ที่สร้างใหม่ไปยังหน้าจอ LoginScreen ด้วยการใช้ Navigator เพื่อเปิดหน้าจอใหม่โดยที่ผู้ใช้จะได้เข้าสู่ระบบหลังจากที่สร้างบัญชีผู้ใช้สำเร็จแล้ว
+            return LoginScreen();
+          }));
+        }
+      } else {
+        print('Not Valid');
+      }
+    } else {
+      print('No Image Picked');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -213,13 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     InkWell(
                       //ปุ่มตรวจสอบว่าใส่ข้อมูลลงไปไหม
                       onTap: () {
-                        if (_formkey.currentState!.validate()) {
-                          _authController.createNewUser(
-                              email, fullname, phone, password, _image);
-                          print('success');
-                        } else {
-                          print('Not Valid');
-                        }
+                        registerUser();
                       },
                       child: Container(
                         height: 50,
