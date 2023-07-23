@@ -16,11 +16,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late String password;
 
+  bool _isLoading = false;
+
   loginUser() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
       String res = await _authController.loginUser(email, password);
 
+      setState(() {
+        _isLoading = false;
+      });
+
       if (res == 'success') {
+        setState(() {
+          _isLoading = false;
+        });
         Get.snackbar('Login Success', 'You Are Now logged in',
             backgroundColor: Colors.yellowAccent,
             colorText: Color.fromRGBO(20, 60, 109, 1.0));
@@ -128,15 +140,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     child: Center(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          letterSpacing: 4,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: _isLoading
+                          ? CircularProgressIndicator(
+                              color: Color.fromRGBO(20, 60, 109, 1.0),
+                            )
+                          : Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                letterSpacing: 4,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ),
                 ),

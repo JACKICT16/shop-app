@@ -19,6 +19,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   //สร้างอ็อบเจ็กต์ของคลาส AuthController ที่เป็นตัวแปร _authController และกำหนดให้เป็นค่าสุดท้าย (final) ได้รับค่าแล้ว จะไม่สามารถเปลี่ยนแปลงค่าได้ในภายหลัง
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
+  bool _isLoading = false;
+
   late String email;
 
   late String fullname;
@@ -49,14 +51,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
   registerUser() async {
     if (_image != null) {
       if (_formkey.currentState!.validate()) {
+        setState(() {
+          _isLoading = true;
+        });
         String res = await _authController.createNewUser(
             email, fullname, phone, password, _image);
+
+        setState(() {
+          _isLoading = false;
+        });
 
         if (res == 'success') {
           // Navigator.push(context, MaterialPageRoute(builder: (context) {
           //   //นำผู้ใช้ที่สร้างใหม่ไปยังหน้าจอ LoginScreen ด้วยการใช้ Navigator เพื่อเปิดหน้าจอใหม่โดยที่ผู้ใช้จะได้เข้าสู่ระบบหลังจากที่สร้างบัญชีผู้ใช้สำเร็จแล้ว
           //   return LoginScreen();
           // }));
+
+          setState(() {
+            _isLoading = false;
+          });
 
           Get.to(LoginScreen()); //ถ้าregisterสำเร็จ ให้ไปยังหน้า login
 
@@ -302,14 +315,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         child: Center(
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                letterSpacing: 4),
-                          ),
+                          child: _isLoading
+                              ? CircularProgressIndicator(
+                                  color: Color.fromRGBO(20, 60, 109, 1.0),
+                                )
+                              : Text(
+                                  'Register',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      letterSpacing: 4),
+                                ),
                         ),
                       ),
                     ),
