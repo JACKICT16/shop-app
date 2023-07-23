@@ -53,211 +53,215 @@ class _RegisterScreenState extends State<RegisterScreen> {
           key: _formkey,
           child: Padding(
             padding: const EdgeInsets.all(15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'PSU SMART CANTEEN',
-                  style: TextStyle(
-                    fontSize: 25, // เพิ่มขนาดตัวอักษรใหญ่ขึ้นเป็น 30
-                    fontWeight: FontWeight.bold, // ทำให้ตัวอักษรหนาขึ้น
-                    letterSpacing:
-                        4, // เพิ่มระยะห่างของตัวอักษรเพื่อทำให้นูนมากขึ้น
-                    color: Color.fromARGB(255, 255, 200, 8),
-                  ),
-                ),
-                Text(
-                  'Register Account?',
-                  style: TextStyle(
-                    fontSize: 15,
-                    letterSpacing: 2,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Stack(
-                  //Stack ใช้สำหรับการจัดวางองค์ประกอบใน Flutter โดยสามารถวางองค์ประกอบลงมาบนองค์ประกอบอื่น ๆ แบบใกล้ชิดกัน
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _image == null
-                        ? CircleAvatar(
-                            //สร้างโปรไฟล์อวตาร
-                            radius: 65,
-                            child: Icon(
-                              Icons.person,
-                              size: 70,
-                              color: Color.fromRGBO(20, 60, 109, 1.0),
+                    Text(
+                      'PSU SMART CANTEEN',
+                      style: TextStyle(
+                        fontSize: 25, // เพิ่มขนาดตัวอักษรใหญ่ขึ้นเป็น 30
+                        fontWeight: FontWeight.bold, // ทำให้ตัวอักษรหนาขึ้น
+                        letterSpacing:
+                            4, // เพิ่มระยะห่างของตัวอักษรเพื่อทำให้นูนมากขึ้น
+                        color: Color.fromARGB(255, 255, 200, 8),
+                      ),
+                    ),
+                    Text(
+                      'Register Account?',
+                      style: TextStyle(
+                        fontSize: 15,
+                        letterSpacing: 2,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Stack(
+                      //Stack ใช้สำหรับการจัดวางองค์ประกอบใน Flutter โดยสามารถวางองค์ประกอบลงมาบนองค์ประกอบอื่น ๆ แบบใกล้ชิดกัน
+                      children: [
+                        _image == null
+                            ? CircleAvatar(
+                                //สร้างโปรไฟล์อวตาร
+                                radius: 65,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 70,
+                                  color: Color.fromRGBO(20, 60, 109, 1.0),
+                                ),
+                              )
+                            : CircleAvatar(
+                                //สร้างโปรไฟล์อวตาร
+                                radius: 65,
+                                backgroundImage: MemoryImage(_image!),
+                              ),
+                        Positioned(
+                          right: 0,
+                          top: 15,
+                          child: IconButton(
+                            onPressed: () {
+                              selectGalleryImage();
+                            },
+                            icon: Icon(
+                              CupertinoIcons.photo,
                             ),
-                          )
-                        : CircleAvatar(
-                            //สร้างโปรไฟล์อวตาร
-                            radius: 65,
-                            backgroundImage: MemoryImage(_image!),
                           ),
-                    Positioned(
-                      right: 0,
-                      top: 15,
-                      child: IconButton(
-                        onPressed: () {
-                          selectGalleryImage();
-                        },
-                        icon: Icon(
-                          CupertinoIcons.photo,
                         ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        email = value;
+                      },
+                      validator: (Value) {
+                        if (Value!.isEmpty) {
+                          return 'Please Email Address Must Not Be Empty';
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Email Address',
+                        hintText: 'Enter Email Address',
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Colors.yellowAccent,
+                        ),
+                        labelStyle: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        fullname = value;
+                      },
+                      validator: (Value) {
+                        if (Value!.isEmpty) {
+                          return 'Please Email Address Must Not Be Empty';
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Full Name',
+                        hintText: 'Enter Fullname',
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.yellowAccent,
+                        ),
+                        labelStyle: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        phone = value;
+                      },
+                      validator: (Value) {
+                        if (Value!.isEmpty) {
+                          return 'Please Phone Number Must Not Be Empty';
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Phone',
+                        hintText: 'Enter Phone',
+                        prefixIcon: Icon(
+                          Icons.phone,
+                          color: Colors.yellowAccent,
+                        ),
+                        labelStyle: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        password = value;
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please Password Must Not Be Empty';
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        hintText: 'Enter Password',
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Colors.yellowAccent,
+                        ),
+                        labelStyle: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      //ปุ่มตรวจสอบว่าใส่ข้อมูลลงไปไหม
+                      onTap: () {
+                        if (_formkey.currentState!.validate()) {
+                          _authController.createNewUser(
+                              email, fullname, phone, password, _image);
+                          print('success');
+                        } else {
+                          print('Not Valid');
+                        }
+                      },
+                      child: Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width - 40,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 255, 200, 8),
+                          borderRadius: BorderRadius.circular(
+                            8,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Register',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                letterSpacing: 4),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return LoginScreen();
+                          }),
+                        );
+                      },
+                      child: Text(
+                        'Already Have An Account ?',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  validator: (Value) {
-                    if (Value!.isEmpty) {
-                      return 'Please Email Address Must Not Be Empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Email Address',
-                    hintText: 'Enter Email Address',
-                    prefixIcon: Icon(
-                      Icons.email,
-                      color: Colors.yellowAccent,
-                    ),
-                    labelStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    fullname = value;
-                  },
-                  validator: (Value) {
-                    if (Value!.isEmpty) {
-                      return 'Please Email Address Must Not Be Empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Full Name',
-                    hintText: 'Enter Fullname',
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.yellowAccent,
-                    ),
-                    labelStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    phone = value;
-                  },
-                  validator: (Value) {
-                    if (Value!.isEmpty) {
-                      return 'Please Phone Number Must Not Be Empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Phone',
-                    hintText: 'Enter Phone',
-                    prefixIcon: Icon(
-                      Icons.phone,
-                      color: Colors.yellowAccent,
-                    ),
-                    labelStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    password = value;
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Password Must Not Be Empty';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'Enter Password',
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.yellowAccent,
-                    ),
-                    labelStyle: TextStyle(color: Colors.white),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  //ปุ่มตรวจสอบว่าใส่ข้อมูลลงไปไหม
-                  onTap: () {
-                    if (_formkey.currentState!.validate()) {
-                      _authController.createNewUser(
-                          email, fullname, phone, password);
-                      print('success');
-                    } else {
-                      print('Not Valid');
-                    }
-                  },
-                  child: Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width - 40,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 200, 8),
-                      borderRadius: BorderRadius.circular(
-                        8,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            letterSpacing: 4),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return LoginScreen();
-                      }),
-                    );
-                  },
-                  child: Text(
-                    'Already Have An Account ?',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ));

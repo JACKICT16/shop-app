@@ -1,8 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController {
+  final FirebaseStorage _storage = FirebaseStorage.instance;
   // class จัดเก็บยืนยันตัวตนด้วย Firebase Authentication
   final FirebaseFirestore _firestore =
       FirebaseFirestore.instance; //ฐานข้อมูลในfirebase
@@ -26,12 +30,31 @@ class AuthController {
     }
   }
 
+  ///FUNCTION TO UPLOAD IMAGE TO FIREBASE STORAGE
+
+  _uploadImageToStorage(Uint8List? image) async {
+    Reference //Reference อ้างอิงตำแหน่ง โดยใช้ข้อมูลจากตัวแปร _auth.currentUser!.uid
+        ref =
+        _storage.ref().child('profileImage').child(_auth.currentUser!.uid);
+    UploadTask uploadTask =
+        ref.putData(image!); //เริ่มอัพโหลด ด้วยคำสั่งPutData
+
+    TaskSnapshot snapshot =
+        await uploadTask; //ใช้ await ในการรอ  ผลลัพท์ของการอัปโหลดซึ่งจะเก็บข้อมูลเกี่ยวกับสถานะของการอัปโหลด เช่น สถานะเสร็จสิ้น สถานะผิดพลาด
+
+    String downloadUrl = await snapshot.ref
+        .getDownloadURL(); //นำข้อมูล TaskSnapshot ที่ได้มาใช้ในการดึง URL ของรูปภาพที่อัปโหลด
+
+    return downloadUrl; //คืนค่า URL ของรูปภาพที่อัปโหลดกลับมา ซึ่งจะสามารถนำไปใช้ในการแสดงรูปภาพหรือเก็บลงฐานข้อมูลได้
+  }
+
   Future<String> createNewUser(
       //ฟังก์ชันสร้างบัญชีผู้ใช้ใหมา่
       String email,
       String fullname,
       String phone,
-      String password) async {
+      String password,
+      Uint8List? image) async {
     String res = 'some error occurred';
 
     try {
@@ -39,9 +62,12 @@ class AuthController {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
 
+      String downloadUrl = await _uploadImageToStorage(image);
+
       await _firestore.collection('buyers').doc(userCredential.user!.uid).set({
         //สร้างบัญชีผู้ใช้ใน Firebase Authentication และเพิ่มข้อมูลผู้ใช้ในคอลเลกชัน 'buyers' ของฐานข้อมูล Firestore พร้อมกัน
         'fullname': fullname,
+        'profileImage': downloadUrl,
         'email': email,
         'buyer_id': userCredential.user!.uid
       });
