@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/controllers/auth_controller.dart';
 import 'package:shop_app/views/screens/auth/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -7,11 +8,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthController _authController = AuthController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late String email;
 
   late String password;
+
+  loginUser() async {
+    if (_formKey.currentState!.validate()) {
+      String res = await _authController.loginUser(email, password);
+
+      if (res == 'success') {
+        print('login in');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,14 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      print('Login in ');
-
-                      print(email);
-                      print(password);
-                    } else {
-                      print('unable to unauthentticate user');
-                    }
+                    loginUser();
                   },
                   child: Container(
                     height: 50,

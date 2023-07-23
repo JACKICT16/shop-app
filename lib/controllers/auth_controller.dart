@@ -1,8 +1,10 @@
+import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController {
@@ -79,6 +81,21 @@ class AuthController {
           .toString(); //จะถูกรับรู้และนำมาเก็บไว้ในตัวแปร e    และค่าของสตริงนี้คือข้อความของข้อผิดพลาดที่เกิดขึ้น
     }
 
+    return res;
+  }
+
+  ///FUNCTION TO LOGIN THE CREATED USER
+
+  Future<String> loginUser(String email, String Password) async {
+    String res = 'some error occurred';
+
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: Password);
+
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
     return res;
   }
 }
