@@ -36,8 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
           _isLoading = false;
         });
 
-        // Get.to(FirstScreen());
-        Get.to(MapScreen());
+        Get.to(FirstScreen());
+        // Get.to(MapScreen());
+        //Get.to(() => MapScreen());
         Get.snackbar('Login Success', 'You Are Now logged in',
             backgroundColor: Colors.yellowAccent,
             colorText: Color.fromRGBO(20, 60, 109, 1.0));
