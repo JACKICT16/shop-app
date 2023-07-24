@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/controllers/auth_controller.dart';
+import 'package:shop_app/views/screens/map_screen.dart'; // map_screen
 import 'package:shop_app/views/screens/auth/register_screen.dart';
+import 'package:shop_app/views/screens/first_screen.dart'; // first_screen
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -33,6 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           _isLoading = false;
         });
+
+        // Get.to(FirstScreen());
+        Get.to(MapScreen());
         Get.snackbar('Login Success', 'You Are Now logged in',
             backgroundColor: Colors.yellowAccent,
             colorText: Color.fromRGBO(20, 60, 109, 1.0));
