@@ -15,10 +15,33 @@ class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
+// ----  map  ----//
+  // late GoogleMapController mapController;
+
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
+
+// ----  map  ----//
+  // late Position currentPosition;
+
+  // getUserCurrentLocation() async {
+  //   await Geolocator.checkPermission();
+
+  //   await Geolocator.requestPermission();
+
+  //   Position await Geolocator.getCurrenyPosition(
+  //     desiredAccuracy: LocationAccuracy.bestForNavigation,forceAndroidLocation: true);
+  //   );
+
+  //   currentPosition = position;
+
+  //   LatLng pos = LatLng(position.latitude ,position.longitude);
+
+  //   CameraPosition cameraPosition = CameraPosition(target: pos,zoom: 16 );
+  //   mapController.animateCamera(cameraUpdate.newCameraPosition(cameraPosition));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +50,19 @@ class _MapScreenState extends State<MapScreen> {
           Color.fromRGBO(20, 60, 109, 1.0), // กำหนดสีพื้นหลังเป็นสีน้ำเงิน
       body: Stack(
         children: [
+          // ----  map  ----//
           // GoogleMap(
-          //   mapType: MapType.hybrid,
+          //   myLocationButtonEnabled: true,
+          //   mapToolbarEnabled: true,
+          //   padding: EdgeInsets.only(bottom: 200),
+          //   mapType: MapType.normal,
           //   initialCameraPosition: _kGooglePlex,
           //   onMapCreated: (GoogleMapController controller) {
           //     _controller.complete(controller);
+
+          //     mapController = controller;
+
+          //     getUserCurrentLocation();
           //   },
           // ),
           Positioned(

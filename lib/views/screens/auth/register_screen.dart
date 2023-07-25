@@ -19,6 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   //สร้างอ็อบเจ็กต์ของคลาส AuthController ที่เป็นตัวแปร _authController และกำหนดให้เป็นค่าสุดท้าย (final) ได้รับค่าแล้ว จะไม่สามารถเปลี่ยนแปลงค่าได้ในภายหลัง
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
+   //แอปพลิเคชันจะไม่แสดงสถานะ loading หรือกิจกรรมการโหลดเมื่อแอปพลิเคชันเริ่มต้นใช้งาน-------
   bool _isLoading = false;
 
   late String email;
@@ -52,13 +53,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (_image != null) {
       if (_formkey.currentState!.validate()) {
         setState(() {
-          _isLoading = true;
+          _isLoading = true; //เริ่มต้นดำเนินการส่งข้อมูล-----------
         });
         String res = await _authController.createNewUser(
             email, fullname, phone, password, _image);
 
         setState(() {
-          _isLoading = false;
+          _isLoading = false; //เสร็จสิ้นการส่งข้อมูล-----------
         });
 
         if (res == 'success') {

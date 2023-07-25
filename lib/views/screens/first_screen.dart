@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app/views/screens/auth/login_screen.dart'; // import หน้า LoginScreen เพื่อให้สามารถเรียกใช้ได้
+// ignore: unused_import
+import 'package:shop_app/views/screens/auth/login_screen.dart';
+// ignore: unused_import
+import 'package:shop_app/views/screens/home_screen.dart';
+import 'package:shop_app/views/screens/main_screen.dart'; // import หน้า LoginScreen เพื่อให้สามารถเรียกใช้ได้
 
 class FirstScreen extends StatelessWidget {
   @override
@@ -43,15 +47,19 @@ class FirstScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 40,
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        Get.to(LoginScreen());
+                        Get.offAll(MainScreen());
+                        // Navigator.pushReplacement(context,
+                        //     MaterialPageRoute(builder: (context) {
+                        //   return HomeScreen();
+                        // }));
                       },
                       icon: Icon(CupertinoIcons.shopping_cart),
                       label: Text(
                         'SHOP NOW',
-                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           letterSpacing: 4,
-                        ),
+                        ),style: TextStyle(
+                        
                       ),
                     ),
                   ),
