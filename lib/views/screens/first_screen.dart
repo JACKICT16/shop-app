@@ -56,10 +56,10 @@ class FirstScreen extends StatelessWidget {
                       icon: Icon(CupertinoIcons.shopping_cart),
                       label: Text(
                         'SHOP NOW',
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           letterSpacing: 4,
-                        ),style: TextStyle(
-                        
+                        ),
                       ),
                     ),
                   ),

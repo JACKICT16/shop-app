@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'main_screen.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -15,33 +19,31 @@ class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-// ----  map  ----//
-  // late GoogleMapController mapController;
+  late GoogleMapController mapController;
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
 
-// ----  map  ----//
-  // late Position currentPosition;
+  late Position currentPosition;
 
-  // getUserCurrentLocation() async {
-  //   await Geolocator.checkPermission();
+  getUserCurrentLocation() async {
+    await Geolocator.checkPermission();
 
-  //   await Geolocator.requestPermission();
+    await Geolocator.requestPermission();
 
-  //   Position await Geolocator.getCurrenyPosition(
-  //     desiredAccuracy: LocationAccuracy.bestForNavigation,forceAndroidLocation: true);
-  //   );
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation,
+        forceAndroidLocationManager: true);
 
-  //   currentPosition = position;
+    currentPosition = position;
 
-  //   LatLng pos = LatLng(position.latitude ,position.longitude);
+    LatLng pos = LatLng(position.latitude, position.longitude);
 
-  //   CameraPosition cameraPosition = CameraPosition(target: pos,zoom: 16 );
-  //   mapController.animateCamera(cameraUpdate.newCameraPosition(cameraPosition));
-  // }
+    CameraPosition cameraPosition = CameraPosition(target: pos, zoom: 16);
+    mapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,20 +53,20 @@ class _MapScreenState extends State<MapScreen> {
       body: Stack(
         children: [
           // ----  map  ----//
-          // GoogleMap(
-          //   myLocationButtonEnabled: true,
-          //   mapToolbarEnabled: true,
-          //   padding: EdgeInsets.only(bottom: 200),
-          //   mapType: MapType.normal,
-          //   initialCameraPosition: _kGooglePlex,
-          //   onMapCreated: (GoogleMapController controller) {
-          //     _controller.complete(controller);
+          GoogleMap(
+            myLocationButtonEnabled: true, //ทิศทางแมพ
+            myLocationEnabled: true, //แสดงแมพ
+            padding: EdgeInsets.only(bottom: 200),
+            mapType: MapType.normal,
+            initialCameraPosition: _kGooglePlex,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
 
-          //     mapController = controller;
+              mapController = controller;
 
-          //     getUserCurrentLocation();
-          //   },
-          // ),
+              getUserCurrentLocation();
+            },
+          ),
           Positioned(
             bottom: 0,
             child: Container(
@@ -79,7 +81,9 @@ class _MapScreenState extends State<MapScreen> {
                   Container(
                     width: MediaQuery.of(context).size.width - 40,
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAll(MainScreen());
+                      },
                       icon: Icon(CupertinoIcons.shopping_cart),
                       label: Text(
                         'SHOP NOW',
