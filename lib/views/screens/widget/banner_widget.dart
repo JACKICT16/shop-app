@@ -48,7 +48,7 @@ class _BannerWidgetState extends State<BannerWidget> {
           });
         }).toList(),
         options: CarouselOptions(
-          height: 400,
+          height: 200,
           aspectRatio: 16 / 9,
           viewportFraction: 0.8,
           initialPage: 0,
