@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/views/screens/widget/location_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,6 +11,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Column(
+      children: [
+        LocationWidget(),
+      ],
+    );
   }
 }
