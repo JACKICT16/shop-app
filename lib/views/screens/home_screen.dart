@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/views/screens/widget/banner_widget.dart';
 import 'package:shop_app/views/screens/widget/location_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +15,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       children: [
         LocationWidget(),
+        //BannerWidget(),
+        BannerWidget(),
       ],
     );
   }
