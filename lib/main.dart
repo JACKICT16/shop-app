@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/views/screens/auth/login_screen.dart';
+import 'package:shop_app/views/screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
               ColorScheme.fromSeed(seedColor: Color.fromRGBO(20, 60, 109, 1.0)),
           useMaterial3: true,
         ),
-        home: LoginScreen());
+        //home: LoginScreen());
+         home: MainScreen(),);
   }
 }
