@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:shop_app/views/screens/account_screen.dart';
 import 'package:shop_app/views/screens/cart_screen.dart';
 import 'package:shop_app/views/screens/category_screen.dart';
@@ -49,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/explore.svg'),
-            label: 'CATEGORIES',
+            label: 'CUISINES',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/cart.svg'),
