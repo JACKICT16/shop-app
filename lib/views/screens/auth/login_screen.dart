@@ -95,9 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     }
                   },
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     labelText: 'Email Address',
                     hintText: 'Enter Email Address',
+                    hintStyle: TextStyle(color: Colors.white,fontSize: 14),
                     prefixIcon: Icon(
                       Icons.email,
                       color: Colors.yellowAccent,
@@ -119,9 +121,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     }
                   },
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText: 'Enter Password',
+                    hintStyle: TextStyle(color: Colors.white,fontSize: 14),
                     prefixIcon: Icon(
                       Icons.lock,
                       color: Colors.yellowAccent,
