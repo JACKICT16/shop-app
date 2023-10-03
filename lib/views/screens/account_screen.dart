@@ -114,7 +114,7 @@ class AccountScreen extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        '0924691213',
+                        data['phone'],
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
