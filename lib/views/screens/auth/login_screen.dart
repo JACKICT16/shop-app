@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/controllers/auth_controller.dart';
-import 'package:shop_app/views/screens/map_screen.dart'; // map_screen
 import 'package:shop_app/views/screens/auth/register_screen.dart';
-import 'package:shop_app/views/screens/first_screen.dart'; // first_screen
+import 'package:shop_app/views/screens/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -36,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
           _isLoading = false;
         });
 
-        Get.to(FirstScreen());
+        Get.to(MainScreen());
         //Get.to(MapScreen());
         //Get.to(() => MapScreen());
         Get.snackbar('Login Success', 'You Are Now logged in',
@@ -99,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     labelText: 'Email Address',
                     hintText: 'Enter Email Address',
-                    hintStyle: TextStyle(color: Colors.white,fontSize: 14),
+                    hintStyle: TextStyle(color: Colors.white, fontSize: 14),
                     prefixIcon: Icon(
                       Icons.email,
                       color: Colors.yellowAccent,
@@ -125,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText: 'Enter Password',
-                    hintStyle: TextStyle(color: Colors.white,fontSize: 14),
+                    hintStyle: TextStyle(color: Colors.white, fontSize: 14),
                     prefixIcon: Icon(
                       Icons.lock,
                       color: Colors.yellowAccent,
