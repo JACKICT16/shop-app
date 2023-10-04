@@ -47,14 +47,17 @@ class HomeMenuWidget extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            height: 60,
-                            width: 60,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                menuData['menuImages'][0],
-                                fit: BoxFit.cover,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 60,
+                              width: 60,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  menuData['menuImages'][0],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),

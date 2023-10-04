@@ -18,7 +18,7 @@ class CategoryScreen extends StatelessWidget {
               width: 5,
             ),
             Text(
-              'Cuisines',
+              'Category',
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.bold, letterSpacing: 5),
             )

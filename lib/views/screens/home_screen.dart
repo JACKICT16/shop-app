@@ -3,6 +3,7 @@ import 'package:shop_app/views/screens/widget/banner_widget.dart';
 import 'package:shop_app/views/screens/widget/category_text_widget.dart';
 import 'package:shop_app/views/screens/widget/home_menu.dart';
 import 'package:shop_app/views/screens/widget/location_widget.dart';
+import 'package:shop_app/views/screens/widget/reuseText.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,6 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 10,
         ),
         HomeMenuWidget(),
+        SizedBox(
+          height: 10,
+        ),
+        ReuseTextWidget(
+          title: "SHOP",
+        ),
       ],
     );
   }

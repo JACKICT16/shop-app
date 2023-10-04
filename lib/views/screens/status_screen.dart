@@ -104,13 +104,16 @@ class StatusScreen extends StatelessWidget {
                     child: GridView.builder(
                       itemCount: snapshot.data!.docs.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 1, // กำหนดให้มี 1 แถว
+                        childAspectRatio: 240 / 80, // ความสูง / ความกว้าง
                         mainAxisSpacing: 8,
                         crossAxisSpacing: 8,
                       ),
                       itemBuilder: (context, index) {
                         final vendorData = snapshot.data!.docs[index];
-                        // GestureDetector() แตะหน้าจอ ทัช (touch)
+                        bool isOpen = vendorData[
+                            'status']; // Assuming 'status' field contains a boolean value
+
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -118,7 +121,6 @@ class StatusScreen extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (context) {
                                   return VendorListScreen(
-                                    //ไว้กดที่หน้าร้านค้า
                                     vendorData: vendorData,
                                   );
                                 },
@@ -127,34 +129,81 @@ class StatusScreen extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  blurRadius: 4,
-                                  offset: Offset(0, 2), //เงา
-                                ),
-                              ],
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey[50],
+                          
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.network(
-                                  vendorData['storeImage'],
-                                  width: 80,
-                                  height: 80,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  vendorData['shopName'].toUpperCase(),
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.start, // แนวนอน
+                                crossAxisAlignment: CrossAxisAlignment
+                                    .start, // ตำแหน่งของ children ในแนวตั้ง
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      vendorData['storeImage'],
+                                      width: 80,
+                                      height: 80,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    width:
+                                        20, // ระยะห่างระหว่างรูปภาพและข้อความ
+                                  ),
+                                  // จัดให้อยู่ที่บนสุด
+                                  Expanded(
+                                    child: Align(
+                                      alignment:
+                                          Alignment.center, // จัดให้เป็นตรงกลาง
+                                      child: Text(
+                                        vendorData['shopName'].toUpperCase(),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 26,
+                                  ),
+                                  Container(
+                                    height: 80,
+                                    width: 100,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 6),
+                                    decoration: BoxDecoration(
+                                      color: isOpen ? Colors.green : Colors.red,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          isOpen
+                                              ? Icons.access_time
+                                              : Icons.access_time,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                            width:
+                                                6), // ระยะห่างระหว่างไอคอนและข้อความ
+                                        Text(
+                                          isOpen ? 'Open' : 'Close',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

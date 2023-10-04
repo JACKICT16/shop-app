@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/explore.svg'),
-            label: 'CUISINES',
+            label: 'CATEGORY',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/cart.svg'),
