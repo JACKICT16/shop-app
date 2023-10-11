@@ -5,6 +5,7 @@ import 'package:shop_app/views/screens/cart_screen.dart';
 import 'package:shop_app/views/screens/category_screen.dart';
 import 'package:shop_app/views/screens/favorite_screen.dart';
 import 'package:shop_app/views/screens/home_screen.dart';
+import 'package:shop_app/views/screens/shop_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> _pages = [
     HomeScreen(),
+    ShopScreen(),
     CategoryScreen(),
     CartScreen(),
     FavoriteScreen(),
@@ -44,6 +46,13 @@ class _MainScreenState extends State<MainScreen> {
               width: 20,
             ),
             label: 'HOME',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/icons/shop.svg',
+              width: 20,
+            ),
+            label: 'SHOP',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/icons/explore.svg'),

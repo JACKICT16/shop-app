@@ -22,8 +22,8 @@ class HomeMenuWidget extends StatelessWidget {
         }
 
         return Container(
-          height: 100,
-          child: PageView.builder(
+          height: 250,
+          child: ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               final menuData = snapshot.data!.docs[index];

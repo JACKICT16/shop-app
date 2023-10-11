@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shop_app/provider/cart_provider.dart';
+import 'package:shop_app/views/screens/inner_screens/checkout_screen.dart';
 
 class CartScreen extends ConsumerStatefulWidget {
   const CartScreen({super.key});
@@ -172,7 +173,16 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return CheckOutScreen();
+                      },
+                    ),
+                  );
+                },
                 child: Text('CHECKOUT'),
               ),
             ],

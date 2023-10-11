@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class VendorListScreen extends StatefulWidget {
   final dynamic vendorData;
 
-  const VendorListScreen({Key? key, required this.vendorData}) : super(key: key);
+  const VendorListScreen({Key? key, required this.vendorData})
+      : super(key: key);
 
   @override
   State<VendorListScreen> createState() => _VendorListScreenState();
@@ -62,7 +63,8 @@ class _VendorListScreenState extends State<VendorListScreen> {
               childAspectRatio: 200 / 300,
             ),
             itemBuilder: (context, index) {
-              final menuData = snapshot.data!.docs[index].data() as Map<String, dynamic>;
+              final menuData =
+                  snapshot.data!.docs[index].data() as Map<String, dynamic>;
               if (menuData['menuImages'] != null &&
                   menuData['menuImages'] is List &&
                   menuData['menuImages'].isNotEmpty) {
@@ -94,7 +96,8 @@ class _VendorListScreenState extends State<VendorListScreen> {
                       ),
                       Text(
                         (menuData['menuPrice'] ?? 0).toString() + ' ฿',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -120,7 +123,8 @@ class _VendorListScreenState extends State<VendorListScreen> {
                       ),
                       Text(
                         (menuData['menuPrice'] ?? 0).toString() + ' ฿',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
