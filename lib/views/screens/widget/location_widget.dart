@@ -25,8 +25,8 @@ class LocationWidget extends StatelessWidget {
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-                hintText: 'Curent Location',
-                labelText: 'Curent Location',
+                hintText: 'Search',
+                labelText: 'Search',
                 // border: InputBorder.none,
                 isDense: true,
               ),

@@ -114,7 +114,7 @@ class AccountScreen extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        data['phone'],
+                        data['phone'].toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

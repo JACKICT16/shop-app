@@ -20,7 +20,8 @@ class ShopScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder<QuerySnapshot>(
           stream: _statusStream,
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
               return Text('Something went wrong');
             }
@@ -41,7 +42,7 @@ class ShopScreen extends StatelessWidget {
                   final vendorData = snapshot.data!.docs[index];
                   bool isOpen = vendorData[
                       'status']; // Assuming 'status' field contains a boolean value
-      
+
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
